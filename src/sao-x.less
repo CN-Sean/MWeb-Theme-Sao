@@ -5,6 +5,14 @@
 SimSun, sans-serif;
 @font-size-root: 16px;
 
+@color-text: rgba(0,0,0,0.75);
+@color-link: #0DB3A6;
+@color-emphasis: #c7254e;
+@color-code: #417cc6;
+@color-code-bg: #ebf5ff;
+@color-hr: #e7e7e7;
+@color-anchor: #0DB3A6;
+
 html,
 body {
   min-width: 200px;
@@ -18,17 +26,7 @@ body {
   -ms-text-size-adjust: 100%;
   text-rendering: optimizelegibility;
   font-size: @font-size-root;
-  color: rgba(0,0,0,0.75);
-}
-
-::selection {
-  text-shadow: none;
-  background: #fcdbd9;
-}
-
-::-moz-selection {
-  text-shadow: none;
-  background: #fcdbd9;
+  color: @color-text;
 }
 
 .markdown-body {
@@ -60,13 +58,11 @@ body {
   }
 
   h2:before {
-    content: '';
-    border-left: 4px solid #de5477;
-    border-radius: 2px 0 0 2px;
+    content: "#";
+    color: @color-anchor;
     position: absolute;
-    left: -15px;
-    height: 40%;
-    top: 30%;
+    left: -0.8em;
+    font-weight: bold;
   }
 
   h3 {
@@ -166,24 +162,32 @@ body {
   }
 
   a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
     text-decoration: none;
-    color: #178cdf;
-  }
-
-  a:hover {
-    color: darken(#178cdf, 8%);
-    -o-transition: .5s;
-    -ms-transition: .5s;
-    -moz-transition: .5s;
-    -webkit-transition: .5s;
+    color: @color-link;
+    &:active,
+    &:hover {
+      outline-width: 0;
+      text-decoration: underline;
+      color: darken(@color-link, 8%);
+      -o-transition: .5s;
+      -ms-transition: .5s;
+      -moz-transition: .5s;
+      -webkit-transition: .5s;
+    }
+    &:not([href]) {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 
   code {
     padding: 2px 6px;
     margin: 0 4px;
     font-size: 85%;
-    color: #c7254e;
-    background: #f9f2f4;
+    background-color: @color-code-bg;
+    color: @color-code;
     border-radius: 3px;
     word-wrap: break-word;
   }
@@ -232,16 +236,16 @@ body {
     height: 4px;
     padding: 0;
     margin: 48px 0 30px;
-    background-color: #e7e7e7;
+    background-color: @color-hr;
     border: 0 none;
   }
 
   em {
     font-style: normal;
-    -webkit-text-emphasis: filled #c7254e;
-    -moz-text-emphasis: filled #c7254e;
-    -ms-text-emphasis: filled #c7254e;
-    text-emphasis: filled #c7254e;
+    -webkit-text-emphasis: filled @color-emphasis;
+    -moz-text-emphasis: filled @color-emphasis;
+    -ms-text-emphasis: filled @color-emphasis;
+    text-emphasis: filled @color-emphasis;
     -webkit-text-emphasis-position: under;
     -moz-text-emphasis-position: under;
     -ms-text-emphasis-position: under;
@@ -250,7 +254,7 @@ body {
 
   strong,
   b {
-    font-weight: bold;
+    font-weight: 600;
   }
 
   u {
